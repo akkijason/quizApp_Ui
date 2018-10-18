@@ -6,17 +6,19 @@ import { ApiService } from '../service/api.service';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent {
+export class QuestionComponent implements OnInit {
 
   question = {};
-  constructor(private _postService: ApiService) { }
+
+  constructor(private _api: ApiService) { }
 
   ngOnInit() {
+    this._api.questionSelected.subscribe(question => this.question = question);
   }
 
   post(question) {
     console.log(`post is ${question}`);
-    this._postService.postQuestion(question);
+    this._api.postQuestion(question);
   }
 
 }

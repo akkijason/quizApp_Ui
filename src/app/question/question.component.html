@@ -1,6 +1,10 @@
 <!-- this is our question
 <button mat-button>test</button> -->
 <mat-card>
+  <mat-card-title>
+    <span *ngIf="question.id">Edit Question</span>
+    <span *ngIf="!question.id">New Question</span>
+  </mat-card-title>
   <mat-card-content>
     <form>
       <mat-form-field class="full-width">
@@ -21,6 +25,8 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button (click)="post(question)" mat-button>POST</button>
+    <button *ngIf="question.id" (click)="_api.putQuestion(question)" mat-button>EDIT</button>
+    <button *ngIf="question.id" (click)="question = {}" mat-button>NEW</button>
+    <button *ngIf="!question.id" (click)="post(question)" mat-button>POST</button>
   </mat-card-actions>
 </mat-card>
